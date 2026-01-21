@@ -6,6 +6,7 @@ services:
       - "${HTTP_PORT}:${HTTP_PORT}"
     restart: always
     environment:
+      - GO_ENV=${GO_ENV}
       - HTTP_PORT=${HTTP_PORT}
       - DB_HOST=db 
       - DB_PORT=${DB_PORT}

@@ -10,12 +10,14 @@ type Config struct {
 	DBPassword   string `mapstructure:"DB_PASSWORD"`
 	DBName       string `mapstructure:"DB_NAME"`
 	GeminiAPIKey string `mapstructure:"GEMINI_API_KEY"`
+	GoEnv        string `mapstructure:"GO_ENV"`
 }
 
 func LoadConfig(path string) (*Config, error) {
 	viper.AddConfigPath(path)
 	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
+	viper.SetDefault("GO_ENV", "development")
 
 	viper.AutomaticEnv()
 
