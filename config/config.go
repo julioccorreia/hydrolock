@@ -17,9 +17,19 @@ func LoadConfig(path string) (*Config, error) {
 	viper.AddConfigPath(path)
 	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
-	viper.SetDefault("GO_ENV", "development")
 
 	viper.AutomaticEnv()
+
+	_ = viper.BindEnv("HTTP_PORT")
+	_ = viper.BindEnv("DB_HOST")
+	_ = viper.BindEnv("DB_PORT")
+	_ = viper.BindEnv("DB_USER")
+	_ = viper.BindEnv("DB_PASSWORD")
+	_ = viper.BindEnv("DB_NAME")
+	_ = viper.BindEnv("GEMINI_API_KEY")
+	_ = viper.BindEnv("GO_ENV")
+
+	viper.SetDefault("GO_ENV", "development")
 
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
